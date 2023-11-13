@@ -5,6 +5,14 @@ import z from 'zod'
 const zodMixins = {
   install(Vue) {
     Vue.mixin({
+      data() {
+        if (this.$options.zodValidations?.bindingError) {
+          return {
+            errors: {},
+          }
+        }
+        return {}
+      },
       beforeCreate() {
         if (this.$options.zodValidations) {
           const { alias, paramName, schema, validations } =
@@ -17,7 +25,7 @@ const zodMixins = {
               paramName,
             })
 
-          const validationSchema = generateZodValidations(this, requestSchema, 'user')
+          const validationSchema = generateZodValidations(this, requestSchema)
           this.$options.validations =
             typeof validations === 'function'
               ? validations(validationSchema)
@@ -28,8 +36,8 @@ const zodMixins = {
   },
 }
 
-function getRequestSchemas(apis = [], { alias }) {
-  const api = apis.find((i) => i.alias === alias)
+export function getRequestSchemas({ alias }) {
+  const api = apiClient.find((i) => i.alias === alias)
   if (!api) {
     throw new Error(`Can't get request schemas of ${alias}`)
   }
@@ -45,8 +53,8 @@ function getRequestSchemas(apis = [], { alias }) {
   )
 }
 
-function getRequestSchema(apis = [], { alias, paramName }) {
-  const schemas = getRequestSchemas(apis, { alias })
+export function getRequestSchema({ alias, paramName }) {
+  const schemas = getRequestSchemas({ alias })
   if (schemas[paramName]) {
     return schemas[paramName]
   }
@@ -65,21 +73,28 @@ function generateZodValidations(vm, schema, errorKey) {
             [key]: generateZodValidations(
               vm,
               schema.shape[key],
-              `${errorKey}.${key}`
+              `${errorKey ? errorKey + '.' : ''}${key}`
             ),
           }
         : {
             [key]: {
               zodValidate: (val) => {
                 const parseVal = schema.shape[key].safeParse(val)
+                if (!vm.errors) {
+                  return parseVal.success
+                }
                 if (!parseVal.success) {
                   vm.$set(
                     vm.errors,
-                    `${errorKey}.${key}`,
+                    `${errorKey ? errorKey + '.' : ''}${key}`,
                     parseVal.error.format()._errors
                   )
                 } else {
-                  vm.$set(vm.errors, `${errorKey}.${key}`, undefined)
+                  vm.$set(
+                    vm.errors,
+                    `${errorKey ? errorKey + '.' : ''}${key}`,
+                    undefined
+                  )
                 }
                 return parseVal.success
               },

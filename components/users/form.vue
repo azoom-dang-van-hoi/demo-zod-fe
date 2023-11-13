@@ -15,13 +15,6 @@
   </div>
 </template>
 <script>
-// import { required } from 'vuelidate/lib/validators'
-// import { apiClient } from '@dangvanhoi/demo-zod-api'
-// import { getRequestSchema, generateZodValidations } from '@/util'
-// const schema = getRequestSchema(apiClient, {
-//   alias: 'createUser',
-//   paramName: 'user',
-// })
 export default {
   name: 'CreateUserForm',
   data() {
@@ -31,7 +24,6 @@ export default {
         email: '',
         age: null,
       },
-      errors: {},
     }
   },
   methods: {
@@ -47,23 +39,16 @@ export default {
   zodValidations: {
     alias: 'createUser',
     paramName: 'user',
-    error: true,
+    bindingError: true,
     validations(schema) {
       return {
         user: {
           ...schema,
+          organization: {},
         },
       }
     },
   },
-
-  // validations() {
-  //   return {
-  //     user: {
-  //       ...generateZodValidations(schema.omit({ organization: true }), this),
-  //     },
-  //   }
-  // },
 }
 </script>
 
