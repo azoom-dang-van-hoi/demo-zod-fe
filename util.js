@@ -47,3 +47,40 @@ export const getRequestSchema = (apis = [], { alias, paramName }) => {
   }
   throw new Error('Param not found')
 }
+
+export const isZodObject = (obj) => {
+  return obj?._def?.typeName === 'ZodObject'
+}
+
+export const generateZodValidations = (schema, vm, errors) => {
+  if (isZodObject(schema)) {
+    const shapes = Object.keys(schema.shape).map((key) =>
+      isZodObject(schema.shape[key])
+        ? {
+            [key]: generateZodValidations(schema.shape[key], vm, (errors || vm.errors)[key]),
+          }
+        : {
+            [key]: {
+              zodValidate: (val) => {
+                const parseVal = schema.shape[key].safeParse(val)
+                if (!parseVal.success) {
+                  vm.$set(errors || vm.errors, key, parseVal.error.format()._errors)
+                  // this.errors.name = val.error.format()._errors
+                } else {
+                  vm.$set(errors || vm.errors, key, undefined)
+                }
+                return parseVal.success
+              },
+            },
+          }
+    )
+    return shapes.reduce((acc, shape) => {
+      console.log(shape)
+      return {
+        ...acc,
+        ...shape,
+      }
+    }, {})
+  }
+  return {}
+}

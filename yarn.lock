@@ -1371,6 +1371,14 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-3.0.0.tgz#798622546b63847e82389e473fd67f2707d82247"
   integrity sha512-hBI9tfBtuPIi885ZsZ32IMEU/5nlZH/KOVYJCOh7gyMxaVLGmLedYqFN6Ui1LXkI8JlC8IsuC0rF0btcRZKd5g==
 
+"@dangvanhoi/demo-zod-api@0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@dangvanhoi/demo-zod-api/-/demo-zod-api-0.0.6.tgz#d04a09b7f3085a4a1e53029fb88da908c1ff8876"
+  integrity sha512-0KOZMAF8+Gk+0ZuJEQi3uFtyRT33sz6eHxRXPgn9rIwfdHguawc5bJQfNG9GmUrA25EupjrhZZPPx3AkN//DOw==
+  dependencies:
+    "@zodios/core" "^10.7.7"
+    zod "3.21.1"
+
 "@discoveryjs/json-ext@0.5.7":
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
@@ -2222,7 +2230,7 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@zodios/core@^10.9.0":
+"@zodios/core@^10.7.7", "@zodios/core@^10.9.0":
   version "10.9.6"
   resolved "https://registry.yarnpkg.com/@zodios/core/-/core-10.9.6.tgz#64ad831216e6ffa71679ea6be8d1ed882bb04d83"
   integrity sha512-aH4rOdb3AcezN7ws8vDgBfGboZMk2JGGzEq/DtW65MhnRxyTGRuLJRWVQ/2KxDgWvV2F5oTkAS+5pnjKbl0n+A==

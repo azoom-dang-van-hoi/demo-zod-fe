@@ -1,6 +1,6 @@
 import ky from 'ky-universal'
 import { KyPlugin, KyZodios } from 'zodios-plugin-ky'
-import { apiClient } from './zod-client'
+import { apiClient } from '@dangvanhoi/demo-zod-api'
 
 export const apis = {
   ferry: ky,

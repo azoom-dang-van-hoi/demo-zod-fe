@@ -7,8 +7,8 @@
 </template>
 
 <script>
+import { apiClient } from '@dangvanhoi/demo-zod-api'
 import { getRequestSchema, pathified } from '@/util'
-import { apiClient } from '@/zod-client'
 const userStore = pathified('user')
 export default {
   name: 'IndexPage',
@@ -18,6 +18,7 @@ export default {
   created() {
     userStore.$dispatch('fetchUser')
   },
+  validations: {},
   methods: {
     onSubmit(user) {
       const schema = getRequestSchema(apiClient, {

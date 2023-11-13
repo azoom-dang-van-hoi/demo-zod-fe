@@ -13,6 +13,7 @@
     "lintfix": "prettier --write --list-different . && yarn lint:js --fix"
   },
   "dependencies": {
+    "@dangvanhoi/demo-zod-api": "0.0.6",
     "@zodios/core": "^10.9.0",
     "axios": "^1.6.1",
     "core-js": "^3.25.3",
