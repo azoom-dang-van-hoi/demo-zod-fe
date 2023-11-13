@@ -21,7 +21,11 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/apis.js', '~/plugins/vuelidate.js'],
+  plugins: [
+    '~/apis.js',
+    '~/plugins/zod-validation.js',
+    '~/plugins/vuelidate.js',
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

@@ -2,26 +2,26 @@
   <div>
     <p>User form</p>
     <p :class="{ error: $v.user?.name?.$error }">
-      User name: <input v-model="user.name" @change="$v.user?.name?.$touch" />
+      User name: <input v-model="user.name" @change="$v?.user?.name?.$touch" />
     </p>
-    <p :class="{ error: $v?.user?.age?.$error }">
-      User age: <input v-model="user.age" @change="$v.user?.age?.$touch" />
+    <p :class="{ error: $v.user?.age?.$error }">
+      User age: <input v-model="user.age" @change="$v?.user?.age?.$touch" />
     </p>
-    <p :class="{ error: $v?.user?.email?.$error }">
+    <p :class="{ error: $v.user?.email?.$error }">
       User email:
-      <input v-model="user.email" @change="$v.user?.email?.$touch" />
+      <input v-model="user.email" @change="$v?.user?.email?.$touch" />
     </p>
     <button @click="submit">Submit</button>
   </div>
 </template>
 <script>
 // import { required } from 'vuelidate/lib/validators'
-import { apiClient } from '@dangvanhoi/demo-zod-api'
-import { getRequestSchema, generateZodValidations } from '@/util'
-const schema = getRequestSchema(apiClient, {
-  alias: 'createUser',
-  paramName: 'user',
-})
+// import { apiClient } from '@dangvanhoi/demo-zod-api'
+// import { getRequestSchema, generateZodValidations } from '@/util'
+// const schema = getRequestSchema(apiClient, {
+//   alias: 'createUser',
+//   paramName: 'user',
+// })
 export default {
   name: 'CreateUserForm',
   data() {
@@ -44,13 +44,26 @@ export default {
     },
   },
 
-  validations() {
-    return {
-      user: {
-        ...generateZodValidations(schema, this),
-      },
-    }
+  zodValidations: {
+    alias: 'createUser',
+    paramName: 'user',
+    error: true,
+    validations(schema) {
+      return {
+        user: {
+          ...schema,
+        },
+      }
+    },
   },
+
+  // validations() {
+  //   return {
+  //     user: {
+  //       ...generateZodValidations(schema.omit({ organization: true }), this),
+  //     },
+  //   }
+  // },
 }
 </script>
 
