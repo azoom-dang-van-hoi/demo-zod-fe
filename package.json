@@ -13,14 +13,29 @@
     "lintfix": "prettier --write --list-different . && yarn lint:js --fix"
   },
   "dependencies": {
+    "@dangvanhoi/demo-zod-api": "0.0.10",
+    "@zodios/core": "^10.9.0",
+    "axios": "^1.6.1",
     "core-js": "^3.25.3",
+    "ky": "^0.30.0",
+    "ky-universal": "^0.10.1",
     "nuxt": "^2.15.8",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
-    "vue-template-compiler": "^2.7.10"
+    "vue-template-compiler": "^2.7.10",
+    "vuelidate": "^0.7.7",
+    "vuex-pathify": "^1.2.4",
+    "zod": "3.21.1",
+    "zodios-plugin-ky": "^0.1.4"
   },
   "devDependencies": {
+    "@babel/compat-data": "7.19.4",
+    "@babel/core": "7.19.6",
     "@babel/eslint-parser": "^7.19.1",
+    "@babel/generator": "7.19.6",
+    "@babel/helper-compilation-targets": "7.19.3",
+    "@babel/helper-create-class-features-plugin": "7.19.0",
+    "@babel/helper-module-transforms": "7.19.6",
     "@nuxtjs/eslint-config": "^11.0.0",
     "@nuxtjs/eslint-module": "^3.1.0",
     "eslint": "^8.24.0",
