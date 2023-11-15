@@ -20,7 +20,7 @@ const zodMixins = {
 
           const requestSchema =
             schema ||
-            getRequestSchema(apiClient, {
+            getRequestSchema({
               alias,
               paramName,
             })
@@ -39,7 +39,9 @@ const zodMixins = {
 export function getRequestSchemas({ alias }) {
   const api = apiClient.find((i) => i.alias === alias)
   if (!api) {
-    throw new Error(`Can't get request schemas of ${alias}`)
+    // Capture error by sentry
+    console.error(`Can't get request schemas of ${alias}`)
+    return null
   }
   return (api.parameters || []).reduce(
     (schema, param) => ({
@@ -55,10 +57,16 @@ export function getRequestSchemas({ alias }) {
 
 export function getRequestSchema({ alias, paramName }) {
   const schemas = getRequestSchemas({ alias })
+  // Capture error by sentry
+  if (!schemas) {
+    return z.object({})
+  }
   if (schemas[paramName]) {
     return schemas[paramName]
   }
-  throw new Error('Param not found')
+  // Capture error by sentry
+  console.error(`Param not found: ${paramName}`)
+  return z.object({})
 }
 
 function isZodObject(obj) {
