@@ -11,6 +11,13 @@
       User email:
       <input v-model="user.email" @change="$v?.user?.email?.$touch" />
     </p>
+    <p :class="{ error: $v.user?.organizationId?.$error }">
+      Organization id:
+      <input
+        v-model="user.organizationId"
+        @change="$v?.user?.organizationId?.$touch"
+      />
+    </p>
     <button @click="submit">Submit</button>
   </div>
 </template>
@@ -23,6 +30,7 @@ export default {
         name: '',
         email: '',
         age: null,
+        organizationId: null,
       },
     }
   },

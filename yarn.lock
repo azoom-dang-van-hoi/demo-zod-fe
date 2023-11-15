@@ -1371,10 +1371,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-3.0.0.tgz#798622546b63847e82389e473fd67f2707d82247"
   integrity sha512-hBI9tfBtuPIi885ZsZ32IMEU/5nlZH/KOVYJCOh7gyMxaVLGmLedYqFN6Ui1LXkI8JlC8IsuC0rF0btcRZKd5g==
 
-"@dangvanhoi/demo-zod-api@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@dangvanhoi/demo-zod-api/-/demo-zod-api-0.0.9.tgz#b89047e4d552b51ac4571eb15e1afea954f4dd59"
-  integrity sha512-0UdROEP2hVm3Aw3YAQVgY4xTtkAMqkR0IUfAi6x7XVNzpRtz4rZmeiZMa6kYkDfHNF2y5FJOUKGsZYD5JLUnaA==
+"@dangvanhoi/demo-zod-api@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@dangvanhoi/demo-zod-api/-/demo-zod-api-0.0.10.tgz#e296a414aa77380c949fe261cf519c1f89b10e4c"
+  integrity sha512-CFQeA+ghcHATZhENPtWDnJ5z9Idq3J3jn11NOvF6G4K0qtQPho/SGYYMPgtR56KuShDD8NeRMr8Npbg6TxKuOg==
   dependencies:
     "@zodios/core" "^10.7.7"
     zod "3.21.1"
