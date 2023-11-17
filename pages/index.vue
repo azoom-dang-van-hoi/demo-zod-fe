@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     onSubmit(user) {
-      console.log(user)
+      userStore.$dispatch('createUser', user)
     },
   },
 }
