@@ -69,8 +69,25 @@ export function getRequestSchema({ alias, paramName }) {
   return z.object({})
 }
 
+function isZodArray(schema) {
+  return schema?._def?.typeName === 'ZodArray'
+}
+
 function isZodObject(obj) {
   return obj?._def?.typeName === 'ZodObject'
+}
+
+function setNestedError(vm, path, value) {
+  const keys = path.split('.')
+  let current = vm.errors
+  for (let i = 0; i < keys.length - 1; i++) {
+    const key = keys[i]
+    if (!current[key]) {
+      vm.$set(current, key, {})
+    }
+    current = current[key]
+  }
+  vm.$set(current, keys[keys.length - 1], value)
 }
 
 function generateZodValidations(vm, schema, errorKey) {
@@ -92,20 +109,29 @@ function generateZodValidations(vm, schema, errorKey) {
                   return parseVal.success
                 }
                 if (!parseVal.success) {
-                  vm.$set(
-                    vm.errors,
+                  setNestedError(
+                    vm,
                     `${errorKey ? errorKey + '.' : ''}${key}`,
                     parseVal.error.format()._errors
                   )
                 } else {
-                  vm.$set(
-                    vm.errors,
+                  setNestedError(
+                    vm,
                     `${errorKey ? errorKey + '.' : ''}${key}`,
                     undefined
                   )
                 }
                 return parseVal.success
               },
+              ...(isZodArray(schema.shape[key])
+                ? {
+                    $each: generateZodValidations(
+                      vm,
+                      schema.shape[key].element,
+                      `${errorKey ? errorKey + '.' : ''}${key}`
+                    ),
+                  }
+                : undefined),
             },
           }
     )
